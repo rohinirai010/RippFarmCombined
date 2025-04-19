@@ -456,7 +456,7 @@ const DepositFlow = () => {
 
   return (
     <div className="fixed inset-0 bg-black/90 dark:bg-black/90 flex items-center justify-center z-50 backdrop-blur-xs max-w-xl mx-auto h-full">
-      <div className="w-full max-w-xl mx-auto h-full bg-[#09142b] dark:bg-[#09142b] shadow-2xl overflow-auto">
+      <div className="w-full max-w-xl mx-auto h-full bg-gradient-to-b from-[#000621] via-[#0a0e2e] to-[#141539] shadow-2xl overflow-auto">
         {/* Header */}
         <div className="px-2 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-cyan-400 dark:bg-indigo-700 text-white flex items-center justify-between">
           <div className="flex items-center">

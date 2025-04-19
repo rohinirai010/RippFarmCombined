@@ -186,3 +186,21 @@
 }
 
 
+.withdraw-input{
+  border: none;
+  border-color: none;
+  
+}
+
+.withdraw-input:focus{
+  border: none;
+  border-color: none;
+  --tw-ring-color: none; 
+}
+
+
+textarea, select:focus {
+       --tw-ring-color: none; 
+  }
+
+

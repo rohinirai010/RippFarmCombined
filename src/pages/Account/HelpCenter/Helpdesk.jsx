@@ -12,12 +12,11 @@ import {
   ChevronRight,
   Loader2,
 } from "lucide-react";
-import Header from "../../partials/Header";
-import Sidebar from "../../partials/Sidebar";
-import CommonTable from "../../components/OverallCommonTable";
+import CommonTable from "../../../components/OverallCommonTable";
+import Footer from "../../../partials/Footer";
+import { motion } from "framer-motion";
 
-const HelpDesk = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+const Helpdesk = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -272,14 +271,10 @@ const HelpDesk = () => {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-50 dark:bg-gray-900">
-      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+   
 
-      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-
-        <main className="grow px-3 sm:px-6 py-6">
-          <div className="max-w-7xl mx-auto">
+        <main className="max-w-xl mx-auto h-screen bg-gradient-to-b from-[#000621] via-[#0a0e2e] to-[#141539]">
+          <div className="grow px-3 sm:px-6 py-6 ">
             <div className="flex flex-col gap-6">
               {/* Breadcrumb */}
               <nav className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
@@ -327,11 +322,11 @@ const HelpDesk = () => {
                     {stats.map((stat) => (
                       <div
                         key={stat.label}
-                        className="bg-white dark:bg-gray-800 rounded-lg p-3 shadow-sm"
+                        className="bg-white dark:bg-gray-800 rounded-lg p-3 sm:p-2 shadow-sm"
                       >
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-4 sm:gap-3">
                           <div
-                            className={`p-3 rounded-full ${stat.bgColor} ${stat.color}`}
+                            className={`p-2 sm:p-1 rounded-full ${stat.bgColor} ${stat.color}`}
                           >
                             <stat.icon className="w-6 h-6" />
                           </div>
@@ -352,7 +347,7 @@ const HelpDesk = () => {
                   </div>
 
                   {/* Search and Filter */}
-                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4">
+                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4  mb-20">
                     <div className="grid grid-cols-3 gap-4 mb-4">
                       <div className="col-span-2 relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -516,10 +511,18 @@ const HelpDesk = () => {
               )}
             </div>
           </div>
+           {/* Footer */}
+      <motion.div
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+        className="z-10"
+      >
+        <Footer activeTab={activeTab} setActiveTab={setActiveTab} />
+      </motion.div>
         </main>
-      </div>
-    </div>
+     
   );
 };
 
-export default HelpDesk;
+export default Helpdesk;

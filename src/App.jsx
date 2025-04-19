@@ -38,8 +38,6 @@ import Termsofuse from "./pages/MainWebsite/Terms-of-use.jsx";
 import PrivacyPolicy from "./pages/MainWebsite/Privacy-Policy.jsx";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute.jsx";
 
-
-
 // admin panel imports
 import MembersList from "./pages/AdminPages/Members/MembersList.jsx";
 import CreateSubAdmin from "./pages/AdminPages/subAdmin/CreateSubAdmin.jsx";
@@ -54,6 +52,12 @@ import RoyaltyBonus from "./pages/AdminPages/Bonanza/RoyaltyBonus.jsx";
 import SpecialReward from "./pages/AdminPages/Bonanza/SpecialReward.jsx";
 import AdminLogin from "./pages/AdminPages/AdminLogin.jsx";
 import AdminDashboard from "./pages/AdminPages/AdminDashboard.jsx";
+import ReferralLink from "./pages/Account/ReferralProgram/ReferralLink.jsx";
+import AccountInfo from "./pages/Account/AccountPrivileges/AccountInfo.jsx";
+import AccountChangePassword from "./pages/Account/AccountPrivileges/accountChangePassword.jsx";
+import WithdrawPage from "./pages/Account/Withdraw/WithdrawPage.jsx";
+import Helpdesk from "./pages/Account/HelpCenter/Helpdesk.jsx"
+import AddressDetailPage from "./pages/Account/AccountPrivileges/AddressDetailPage.jsx";
 
 function App() {
   const location = useLocation();
@@ -96,7 +100,6 @@ function App() {
         <Loader onLoaderComplete={handleLoaderComplete} />
       ) : (
         <Routes>
-
           {/* ---------------------- Main Website Routes ---------------- */}
           <Route path="/" element={<Home />} />
           <Route path="/About" element={<About />} />
@@ -109,7 +112,6 @@ function App() {
           />
           <Route path="/Terms-of-use" element={<Termsofuse />} />
           <Route path="/Privacy-Policy" element={<PrivacyPolicy />} />
-
 
           {/*---------------------- User Panel Routes -------------------------*/}
           <Route path="/user/register" element={<Register />} />
@@ -125,6 +127,11 @@ function App() {
             element={<PackageDetail />}
           />
           <Route path="/user/account" element={<AccountPage />} />
+          <Route path="/user/account/account-info" element={<AccountInfo />} />
+          <Route path="/user/account/change-password" element={<AccountChangePassword />} />
+          <Route path="/user/account/address-detail" element={<AddressDetailPage />} />
+
+          {/* User Panel accounts --> Reports section routes */}
           <Route path="/user/report/bot-profit" element={<BotProfitPage />} />
           <Route
             path="/user/report/level-income"
@@ -132,20 +139,40 @@ function App() {
           />
           <Route path="/user/report/direct" element={<DirectTeamPage />} />
           <Route path="/user/report/downline" element={<DownlineTeamPage />} />
-          <Route
-            path="/user/report/transaction-report"
-            element={<TransactionReport />}
-          />
+
           <Route
             path="/user/report/my-earning"
             element={<MyEarningReportPage />}
           />
+
+
+          {/* User Panel accounts --> transaction section routes */}
+          <Route
+            path="/user/transaction/transaction-report"
+            element={<TransactionReport />}
+          />
+
+          <Route
+            path="/user/account/withdraw"
+            element={<WithdrawPage />}
+          />
+
+          {/* User Panel accounts --> Referral Program section routes */}
+          <Route
+            path="/user/referral/share-referral-link"
+            element={<ReferralLink />}
+          />
+
+          {/* User Panel accounts --> Referral Program section routes */}
+          <Route
+            path="/user/account/helpdesk"
+            element={<Helpdesk />}
+          />
+
           <Route path="/user/deposit" element={<DepositFlow />} />
           <Route path="/user/odl" element={<ODLClaimPage />} />
           <Route path="/user/level" element={<LevelPage />} />
           <Route path="/user/packages" element={<LivePackagePage />} />
-
-
 
           {/*--------------------------- admin routes ------------------------*/}
           <Route exact path="/anjo/login" element={<AdminLogin />} />

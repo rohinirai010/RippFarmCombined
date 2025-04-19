@@ -242,7 +242,7 @@ export default function Dashboard() {
             className="mb-6 md:mb-8 bg-blue-900/10 px-2 py-4 rounded-xl backdrop-blur-xs shadow-lg shadow-blue-900/30"
           >
             <p className="text-sm md:text-base opacity-80 mb-1">
-              Wallet Balance
+              R-Wallet Balance
             </p>
             <div className="flex justify-between items-center">
               <AnimatePresence>
