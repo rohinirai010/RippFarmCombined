@@ -179,7 +179,7 @@ const AddressDetailPage = () => {
                 <div className="truncate pr-2">{addresses.usdt.address}</div>
                 {addresses.usdt.isVerified && (
                   <button
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-2xl"
                     onClick={() => handleAddAddress("usdt")}
                   >
                     Change
@@ -253,7 +253,7 @@ const AddressDetailPage = () => {
                 <div className="truncate pr-2">{addresses.xrp.address}</div>
                 {addresses.xrp.isVerified && (
                   <button
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-2xl"
                     onClick={() => handleAddAddress("xrp")}
                   >
                     Change

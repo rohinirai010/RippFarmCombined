@@ -389,7 +389,7 @@ const AccountPage = () => {
             <MenuCard
               icon={BiHistory}
               label="History"
-              onClick={() => navigate("/fund-transfer")}
+              onClick={() => navigate("/user/account/history")}
             />
           </div>
         </div>
@@ -411,7 +411,7 @@ const AccountPage = () => {
             <MenuCard
               icon={RiTeamLine}
               label="My Network"
-              onClick={() => navigate("/my-network")}
+              onClick={() => navigate("/user/account/my-network")}
             />
           </div>
         </div>

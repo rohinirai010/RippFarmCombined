@@ -103,7 +103,7 @@ export default function ODLClaimPage() {
         <div className="text-7xl sm:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-[#a8b1f9] via-[#a8b1f9] to-[#29298b] mb-2">ODL</div>
         
         {/* Info text */}
-        <p className="text-[#4b4a92] tracking-wide text-left text-sm sm:text-base mb-7 sm:mb-10">
+        <p className="text-[#a8b1f9] tracking-wide text-left text-sm sm:text-base mb-7 sm:mb-10">
           {claimed 
             ? <>Your ODL have been successfully claimed. <br /> Next ODL will be available after the timer expires.</>
             : "Claim your ODL earnings every 72 hours. If you miss claiming within the window, you will lose that cycle's income."
@@ -158,7 +158,7 @@ export default function ODLClaimPage() {
       <p className="text-gray-500 text-xs sm:text-sm mt-4 opacity-70">
         {claimed 
           ? "Next claim available when timer expires." 
-          : "This action is available once every 72 hours"
+          : "This bonus is available once every 72 hours"
         }
       </p>
     

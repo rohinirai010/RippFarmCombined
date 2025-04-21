@@ -21,10 +21,13 @@ import {
   RefreshCcw,
   BarChart3,
   ChevronDown,
+  ArrowRight,
+  Package,
 } from "lucide-react";
 import Footer from "../partials/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
+import { setActivePackageType } from "../ReduxStateManagement/slices/packageSlice";
 import { loadUser, logoutUser } from "../ReduxStateManagement/slices/authSlice";
 import userLoginLogo from "../images/sidebarLogoCollapsed.png";
 import {
@@ -41,18 +44,19 @@ import {
   TeamDistributionFilter,
   TradingSummaryItem,
   AiBotControls,
-  ReferralLinkCopy
+  ReferralLinkCopy,
 } from "../partials/dashboard/HelperComponents";
 import { FaTelegram } from "react-icons/fa";
 import { PiHandDepositDuotone, PiHandWithdrawDuotone } from "react-icons/pi";
 import { BsTwitter } from "react-icons/bs";
 import aiBotImage from "../images/aiBotImg.png";
 import { CountdownBar } from "../partials/odl/CountdownBar";
-
+import { CappingOverviewCarousel } from "../partials/capping/CappingOverviewCarousel";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [walletView, setWalletView] = useState("balance");
+  const [selectedPackage, setSelectedPackage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [balanceVisible, setBalanceVisible] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
@@ -62,6 +66,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useSelector((state) => state.auth);
   const { walletBalance } = useSelector((state) => state.packageDetail);
+  const { activePackageType } = useSelector((state) => state.packageDetail);
 
   // Sample activities data
   const activities = [
@@ -109,7 +114,6 @@ export default function Dashboard() {
     },
   ];
 
-
   // Sample data from the images
   const dashboardData = {
     totalTeam: 17,
@@ -127,6 +131,31 @@ export default function Dashboard() {
     closedPositions: 0,
   };
 
+  // Package details with data from Redux state
+  const packageDetails = {
+    igniteFund: {
+      name: "Ignite Fund",
+      dailyReturn: "0.3%",
+      range: "$100 to $999",
+      unlockedLevels: 5,
+      totalLevels: 10,
+    },
+    elevatePlus: {
+      name: "Elevate Plus",
+      dailyReturn: "0.4%",
+      range: "$1000 to $9999",
+      unlockedLevels: 5,
+      totalLevels: 10,
+    },
+    legacyVault: {
+      name: "Legacy Vault",
+      dailyReturn: "0.5%",
+      range: "$10000+",
+      unlockedLevels: 10,
+      totalLevels: 10,
+    },
+  };
+
   useEffect(() => {
     dispatch(loadUser())
       .unwrap()
@@ -135,6 +164,13 @@ export default function Dashboard() {
         navigate("/user/login");
       });
   }, [dispatch, navigate]);
+
+  useEffect(() => {
+    // Updating selected package when active package type changes
+    if (activePackageType) {
+      setSelectedPackage(packageDetails[activePackageType]);
+    }
+  }, [activePackageType]);
 
   // Simulate app loading
   useEffect(() => {
@@ -178,7 +214,9 @@ export default function Dashboard() {
   }
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(`http://bampasfx.com/m/join.aspx?spid=${user?.username || 'TOP'}`);
+    navigator.clipboard.writeText(
+      `http://bampasfx.com/m/join.aspx?spid=${user?.username || "TOP"}`
+    );
     setLinkCopied(true);
     setTimeout(() => setLinkCopied(false), 2000);
   };
@@ -216,7 +254,7 @@ export default function Dashboard() {
               transition={{ duration: 0.5 }}
               className="mb-6 md:mb-8"
             >
-              <p className="text-base md:text-lg opacity-80">Good Morning</p>
+              <p className="text-base md:text-lg opacity-80">Hello,</p>
               <h1 className="text-2xl md:text-4xl font-bold">{displayName}</h1>
             </motion.div>
 
@@ -298,8 +336,6 @@ export default function Dashboard() {
             </AnimatePresence>
           </motion.div>
 
-        
-
           {/* Activities & Earnings */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
@@ -308,10 +344,7 @@ export default function Dashboard() {
           >
             <div className="flex justify-between items-center mb-3">
               <p className="text-base text-gray-300">Activities & Earnings</p>
-              <ViewAllButton 
-                label="See All" 
-                navigateTo="/user/transactions" 
-              />
+              <ViewAllButton label="See All" navigateTo="/user/transactions" />
             </div>
             <div className="grid grid-cols-2 gap-2 sm:gap-4">
               {activities.map((item, index) => (
@@ -326,6 +359,25 @@ export default function Dashboard() {
               ))}
             </div>
           </motion.div>
+
+          {/* Capping Overview */}
+          {selectedPackage && (
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <div className="flex justify-between items-center mb-3 mt-5">
+                <p className="text-base text-gray-300"> Capping Overview </p>
+                <ViewAllButton
+                  label="See All"
+                  navigateTo="/user/account/capping"
+                />
+              </div>
+
+             <CappingOverviewCarousel />
+            </motion.div>
+          )}
 
           {/* Key Metrics */}
           <motion.div
@@ -374,9 +426,7 @@ export default function Dashboard() {
                     <Users className="mr-2 text-violet-500" size={18} />
                     Team Distribution
                   </h2>
-                  <TeamDistributionFilter 
-                    onFilterChange={setTeamFilter}
-                  />
+                  <TeamDistributionFilter onFilterChange={setTeamFilter} />
                 </div>
 
                 {/* Donut Chart */}
@@ -540,10 +590,7 @@ export default function Dashboard() {
                     </div>
                   </div>
 
-                  <AiBotControls 
-                    isActive={aiActive} 
-                    onToggle={toggleAiBot} 
-                  />
+                  <AiBotControls isActive={aiActive} onToggle={toggleAiBot} />
 
                   {aiActive && (
                     <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800 text-sm text-green-700 dark:text-green-300 flex items-center mt-4">
@@ -564,8 +611,10 @@ export default function Dashboard() {
                     </div>
                   )}
                 </div>
-                <ReferralLinkCopy 
-                  referralLink={`http://bampasfx.com/m/join.aspx?spid=${user?.username || 'TOP'}`}
+                <ReferralLinkCopy
+                  referralLink={`http://bampasfx.com/m/join.aspx?spid=${
+                    user?.username || "TOP"
+                  }`}
                   onCopy={handleCopyLink}
                 />
               </div>
@@ -639,7 +688,8 @@ export default function Dashboard() {
 
                 <div className="text-center mt-3">
                   <p className="text-gray-400 dark:text-gray-500 text-xs">
-                    Joining our community means you'll never miss important updates
+                    Joining our community means you'll never miss important
+                    updates
                   </p>
                 </div>
               </div>
@@ -649,8 +699,8 @@ export default function Dashboard() {
           <div className="h-22"></div>
         </motion.div>
 
-         {/* sticky odl CountdownBar */}
-         <CountdownBar />
+        {/* sticky odl CountdownBar */}
+        <CountdownBar />
 
         <motion.div
           initial={{ y: 50 }}
@@ -663,3 +713,4 @@ export default function Dashboard() {
     </>
   );
 }
+

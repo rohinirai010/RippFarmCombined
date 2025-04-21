@@ -56,8 +56,11 @@ import ReferralLink from "./pages/Account/ReferralProgram/ReferralLink.jsx";
 import AccountInfo from "./pages/Account/AccountPrivileges/AccountInfo.jsx";
 import AccountChangePassword from "./pages/Account/AccountPrivileges/accountChangePassword.jsx";
 import WithdrawPage from "./pages/Account/Withdraw/WithdrawPage.jsx";
-import Helpdesk from "./pages/Account/HelpCenter/Helpdesk.jsx"
+import Helpdesk from "./pages/Account/HelpCenter/Helpdesk.jsx";
 import AddressDetailPage from "./pages/Account/AccountPrivileges/AddressDetailPage.jsx";
+import MyNetwork from "./pages/Account/Reports/MyNetwork.jsx";
+import MyHistory from "./pages/Account/Reports/MyHistory.jsx";
+import CappingDetailPage from "./pages/Account/Capping/CappingDetailPage.jsx";
 
 function App() {
   const location = useLocation();
@@ -128,8 +131,14 @@ function App() {
           />
           <Route path="/user/account" element={<AccountPage />} />
           <Route path="/user/account/account-info" element={<AccountInfo />} />
-          <Route path="/user/account/change-password" element={<AccountChangePassword />} />
-          <Route path="/user/account/address-detail" element={<AddressDetailPage />} />
+          <Route
+            path="/user/account/change-password"
+            element={<AccountChangePassword />}
+          />
+          <Route
+            path="/user/account/address-detail"
+            element={<AddressDetailPage />}
+          />
 
           {/* User Panel accounts --> Reports section routes */}
           <Route path="/user/report/bot-profit" element={<BotProfitPage />} />
@@ -145,17 +154,17 @@ function App() {
             element={<MyEarningReportPage />}
           />
 
-
           {/* User Panel accounts --> transaction section routes */}
           <Route
             path="/user/transaction/transaction-report"
             element={<TransactionReport />}
           />
 
-          <Route
-            path="/user/account/withdraw"
-            element={<WithdrawPage />}
-          />
+          <Route path="/user/account/withdraw" element={<WithdrawPage />} />
+
+          <Route path="/user/account/my-network" element={<MyNetwork />} />
+          <Route path="/user/account/history" element={<MyHistory />} />
+          <Route path="/user/account/capping" element={<CappingDetailPage />} />
 
           {/* User Panel accounts --> Referral Program section routes */}
           <Route
@@ -164,10 +173,7 @@ function App() {
           />
 
           {/* User Panel accounts --> Referral Program section routes */}
-          <Route
-            path="/user/account/helpdesk"
-            element={<Helpdesk />}
-          />
+          <Route path="/user/account/helpdesk" element={<Helpdesk />} />
 
           <Route path="/user/deposit" element={<DepositFlow />} />
           <Route path="/user/odl" element={<ODLClaimPage />} />

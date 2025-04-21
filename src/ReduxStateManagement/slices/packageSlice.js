@@ -16,6 +16,7 @@ const initialState = {
       activationAmount: 100,
       odlProfitMax: 20,
       directRippleBounty: 5,
+      capping: 2,
       networkBounty: [
         { level: "L1", percent: 5 },
         { level: "L2", percent: 3 },
@@ -37,6 +38,7 @@ const initialState = {
       activationAmount: 1000,
       odlProfitMax: 30,
       directRippleBounty: 7,
+      capping: 2,
       networkBounty: [
         { level: "L1", percent: 7 },
         { level: "L2", percent: 3 },
@@ -58,6 +60,7 @@ const initialState = {
       activationAmount: 10000,
       odlProfitMax: 50,
       directRippleBounty: 10,
+      capping: 3,
       networkBounty: [
         { level: "L1", percent: 10 },
         { level: "L2", percent: 3 },
